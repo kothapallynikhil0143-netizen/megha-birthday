@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday megha ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Orbitron',sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at top,#0a0f2c,#000);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+  text-align:center;
+}
+
+h1{
+  font-size:3rem;
+  color:#00fff7;
+  text-shadow:0 0 25px #00fff7;
+  margin-bottom:20px;
+}
+
+h2{
+  color:#cfb446;
+  margin-bottom:18px;
+}
+
+p{
+  max-width:720px;
+  line-height:1.8;
+  color:#33badc;
+  font-size:1.4rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.btn{
+  margin-top:30px;
+  padding:14px 34px;
+  border-radius:30px;
+  border:2px solid #00fff7;
+  background:transparent;
+  color:#00fff7;
+  cursor:pointer;
+  transition:.4s;
+  box-shadow:0 0 20px #00fff7;
+}
+
+.btn:hover{
+  background:#00fff7;
+  color:#000;
+  box-shadow:0 0 40px #00fff7;
+}
+
+#typing{
+  margin-top:20px;
+  font-size:1.3rem;
+  color:#00fff7;
+  min-height:60px;
+}
+
+/* Gallery */
+.gallery{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+  max-width:950px;
+  width:100%;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:18px;
+  transition:.4s;
+  box-shadow:0 0 25px rgba(0,255,247,.4);
+}
+
+.gallery img:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 45px rgba(255,102,196,.8);
+}
+
+
+
+footer{
+  padding:20px;
+  font-size:.9rem;
+  color:#aaa;
+}
+
+.music-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#00fff7;
+  color:#000;
+  border:none;
+  padding:12px 18px;
+  border-radius:50px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 0 20px #00fff7;
+  z-index:100;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="./song.mp3" type="audio/mpeg">
+</audio>
+
+
+<button class="music-btn" onclick="toggleMusic()">🔊 Music</button>
+
+
+<section>
+  <h1>✨ Happy Birthday meghulu✨</h1>
+  <h2>To Someone Truly amazing and the one i can call one of my closet friend</h2>
+  <p>
+    Some people don’t just enter our lives —  
+    they light them up in ways words can never fully explain, that's u hehe.
+
+    entha chepina thakkone so chupisthuna 
+    illa chinna chinna eforts tho.( ofc koncham ai use chesa 😅😆)
+  </p>
+
+  <div id="typing"></div>
+
+  <button class="btn" onclick="scrollToGallery()">See Memories 💞</button>
+</section>
+
+<section id="gallery-section">
+  <h1>📸 Moments That Matter</h1>
+  <p>always be you, dare the world and be the bold, and never stop smiling, your smile make people happy and stress free( believe me, it's truth hehe) ✨</p>
+
+  <div class="gallery">
+    <!-- Random aesthetic images (replace later with her photos) -->
+    <img src="./left.jpg">
+    <img src="./mm.jpeg">
+    <img src="./cc.jpg">
+  </div>
+</section>
+
+<section>
+  <h1>🎂 A Wish From Me</h1>
+  <p>
+    May your smile never fade,  
+    nuvvu ekkada unna, ela unna, i always pray for your well being....
+  </p>
+<img src="./middle.jpeg" align="middle">
+  <p style="margin-top:20px;">
+    Stay magical. Always. 💫
+  </p>
+</section>
+
+<footer>
+  <p style="color: #33badc;">party ivvali sarena marchipoku loozz</p>
+</footer>
+
+<script>
+  
+/* Typing Effect */
+const text="Wishing you love, laughter, and a year as beautiful as your soul ✨";
+let i=0;
+function typeEffect(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeEffect,55);
+  }
+}
+typeEffect();
+
+function scrollToGallery(){
+  document.getElementById("gallery-section").scrollIntoView({behavior:"smooth"});
+}
+
+
+
+/* Star particles */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+let stars=Array.from({length:140},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*1.6,
+  d:Math.random()*0.6
+}));
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#00fff7";
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y+=s.d;
+    if(s.y>canvas.height){
+      s.y=0;
+      s.x=Math.random()*canvas.width;
+    }
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* Music control */
+/* Music control - CLEAN & WORKING */
+const music = document.getElementById("bgMusic");
+let playing = false;
+
+// First user interaction anywhere
+document.addEventListener("click", () => {
+  music.muted = false;
+  music.volume = 0.5;
+  music.play();
+  playing = true;
+}, { once: true });
+
+// Button toggle
+function toggleMusic(){
+  if(playing){
+    music.pause();
+    playing = false;
+  } else {
+    music.muted = false;
+    music.play();
+    playing = true;
+  }
+}
+
+</script>
+
+</body>
+</html>
